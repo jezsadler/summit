@@ -5,15 +5,12 @@ from .tsemo import TSEMO
 from .neldermead import NelderMead
 from .snobfit import SNOBFIT
 from .sobo import SOBO
-from .gryffin import GRYFFIN
 from .deep_reaction_optimizer import DRO
 
 
 def strategy_from_dict(d):
     if d["name"] == "TSEMO":
         return TSEMO.from_dict(d)
-    elif d["name"] == "GRYFFIN":
-        return GRYFFIN.from_dict(d)
     elif d["name"] == "SOBO":
         return SOBO.from_dict(d)
     elif d["name"] == "SNOBFIT":
@@ -30,4 +27,3 @@ def strategy_from_dict(d):
         return DRO.from_dict(d)
     else:
         raise ValueError(f"""Strategy {d["name"]} not found.""")
-

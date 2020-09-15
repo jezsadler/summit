@@ -78,10 +78,15 @@ def test_runner_unit(max_iterations, batch_size, max_same, max_restarts, runner)
     assert r.experiment.data.shape[0] == int(batch_size * iterations)
 
 
-@pytest.mark.parametrize("strategy", [SOBO, SNOBFIT, GRYFFIN, NelderMead, Random, LHS])
+@pytest.mark.parametrize("strategy", [SOBO, SNOBFIT, NelderMead, Random, LHS])
 @pytest.mark.parametrize(
     "experiment",
-    [Himmelblau, Hartmann3D, ThreeHumpCamel, BaumgartnerCrossCouplingEmulator,],
+    [
+        Himmelblau,
+        Hartmann3D,
+        ThreeHumpCamel,
+        BaumgartnerCrossCouplingEmulator,
+    ],
 )
 def test_runner_so_integration(strategy, experiment):
     exp = experiment()
@@ -96,9 +101,7 @@ def test_runner_so_integration(strategy, experiment):
     os.remove("test_save.json")
 
 
-@pytest.mark.parametrize(
-    "strategy", [SOBO, SNOBFIT, GRYFFIN, NelderMead, Random, LHS, TSEMO]
-)
+@pytest.mark.parametrize("strategy", [SOBO, SNOBFIT, NelderMead, Random, LHS, TSEMO])
 @pytest.mark.parametrize(
     "experiment",
     [
@@ -112,7 +115,7 @@ def test_runner_so_integration(strategy, experiment):
 def test_runner_mo_integration(strategy, experiment):
     exp = experiment()
 
-    if experiment == ReizmanSuzukiEmulator and strategy not in [SOBO, GRYFFIN]:
+    if experiment == ReizmanSuzukiEmulator and strategy not in [SOBO]:
         # only run on strategies that work with categorical variables deireclty
         return
     elif strategy == TSEMO:
