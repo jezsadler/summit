@@ -4,7 +4,7 @@ on: [push]
 jobs:
   #Run pytest and build package
   test_build:
-    runs-on: ubuntu-latest
+    runs-on: [ubuntu-latest, windows-2019]
 
     steps:
     - name: Checkout repository
