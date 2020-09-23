@@ -30,7 +30,7 @@ jobs:
           ${{ runner.os }}-poetry-
     
     - name: Install dependencies
-      run: poetry install -E experiments
+      run: poetry lock && poetry install -E experiments
 
     - name: Run pytest
       run: poetry run pytest --doctest-modules --ignore=case_studies --ignore=experiments
