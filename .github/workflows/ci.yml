@@ -28,13 +28,9 @@ jobs:
         key: ${{ runner.os }}-poetry-${{ hashFiles('poetry.lock') }}
         restore-keys: |
           ${{ runner.os }}-poetry-
-
-    - name: Install pytorch
-      if: ${{ runner.os == 'Windows' }}
-      run: pip install torch==1.4.0+cpu -f https://download.pytorch.org/whl/torch_stable.html
     
     - name: Install dependencies
-      run: poetry install -E experiments
+      run: poetry add torch  && poetry install -E experiments
 
     - name: Run pytest
       run: poetry run pytest --doctest-modules --ignore=case_studies --ignore=experiments
